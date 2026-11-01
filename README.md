@@ -1,6 +1,6 @@
-# Luc Nexus Networking Group — Website
+# Luc Nexus Group — Website
 
-This package is a deployment-ready responsive static website matching the supplied Luc Nexus Networking Group visual direction.
+This package is a deployment-ready responsive static website matching the supplied Luc Nexus Group visual direction.
 
 ## Included
 - `index.html` — complete website, content and SEO structure
@@ -10,7 +10,7 @@ This package is a deployment-ready responsive static website matching the suppli
 
 ## Contact
 Phone / WhatsApp: +27 (82) 472 0050
-Email: lucnexusnetworkinggroup@gmail.com
+Email: luxnexusgroup@gmail.com
 
 ## Deployment
 Upload the contents of this package to your hosting provider's public web directory (often `public_html` on cPanel), keeping the `assets` folder beside `index.html`.
