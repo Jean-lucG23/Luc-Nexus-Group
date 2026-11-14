@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /send-confirmation.php
-Disallow: /speedtest.php
-
-Sitemap: https://lucnexusgroup.com/sitemap.xml
