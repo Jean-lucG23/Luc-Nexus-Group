@@ -1,0 +1,65 @@
+/* Luc Nexus Group: 3D depth layer. Loaded after each page's inline styles. */
+
+/* ---------- 3D scroll reveal (forward + reverse) ---------- */
+.js .reveal{opacity:0;transform:perspective(1100px) translate3d(0,56px,-130px) rotateX(16deg);transform-origin:50% 100%;
+  transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform 1.05s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s);}
+.js .reveal.left{transform:perspective(1100px) translate3d(-64px,18px,-110px) rotateY(15deg);transform-origin:0 50%}
+.js .reveal.right{transform:perspective(1100px) translate3d(64px,18px,-110px) rotateY(-15deg);transform-origin:100% 50%}
+.js .reveal.zoom{transform:perspective(1100px) translate3d(0,30px,-280px) rotateX(10deg) scale(.93)}
+/* entering while scrolling back up: arrive from above */
+.js .reveal.from-top{transform:perspective(1100px) translate3d(0,-56px,-130px) rotateX(-16deg);transform-origin:50% 0}
+.js .reveal.in{opacity:1;transform:perspective(1100px) translate3d(0,0,0) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-origin:50% 50%}
+
+/* ---------- 3D card tilt + light sweep (pointer devices) ---------- */
+.tilt{position:relative}
+.tilt::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(0,242,254,.14),transparent 62%)}
+.js .tilt.in.tilting{transition:transform .14s ease-out,translate .25s ease,border-color .3s,box-shadow .3s;transition-delay:0s;translate:0 -4px;
+  box-shadow:0 26px 60px -24px rgba(0,242,254,.35)}
+.tilt.tilting::before{opacity:1}
+
+/* ---------- section plane drifts in and out of depth as it scrolls ---------- */
+
+
+/* ---------- ambient depth layer (injected by site.js) ---------- */
+#depth-bg{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;opacity:.5;contain:strict}
+#depth-bg .floor{position:absolute;left:-60%;right:-60%;bottom:-6%;height:62%;transform:perspective(620px) rotateX(66deg);transform-origin:50% 100%;
+  background-image:linear-gradient(rgba(0,242,254,.11) 1px,transparent 1px),linear-gradient(90deg,rgba(0,242,254,.11) 1px,transparent 1px);
+  background-size:72px 72px;
+  -webkit-mask-image:linear-gradient(to top,#000 0,transparent 80%);mask-image:linear-gradient(to top,#000 0,transparent 80%)}
+#depth-bg .orb{position:absolute;border-radius:9999px;opacity:.35}
+#depth-bg .o1{width:380px;height:380px;left:-90px;top:12%;background:radial-gradient(circle,#4facfe 0,transparent 68%)}
+#depth-bg .o2{width:320px;height:320px;right:-70px;top:38%;background:radial-gradient(circle,#8a2be2 0,transparent 68%)}
+#depth-bg .o3{width:260px;height:260px;left:42%;top:70%;background:radial-gradient(circle,#00f2fe 0,transparent 68%)}
+
+/* ---------- buttons: raised, glowing ---------- */
+a[class*="from-cyan-500"],button[class*="from-cyan-500"]{transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s,opacity .2s}
+a[class*="from-cyan-500"]:hover,button[class*="from-cyan-500"]:not(:disabled):hover{transform:translateY(-3px);box-shadow:0 16px 36px -12px rgba(0,242,254,.55)}
+
+/* ---------- services page: slim, near-invisible chip rail scrollbar ---------- */
+.chip-rail{padding-bottom:9px!important;scrollbar-width:thin;scrollbar-color:rgba(34,211,238,.28) transparent;scroll-behavior:smooth;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%)}
+.chip-rail::-webkit-scrollbar{height:3px;background:transparent}
+.chip-rail::-webkit-scrollbar-track{background:transparent;margin:0 28px}
+.chip-rail::-webkit-scrollbar-thumb{border-radius:9999px;background:linear-gradient(90deg,rgba(0,242,254,.15),rgba(79,172,254,.45),rgba(138,43,226,.3))}
+.chip-rail:hover::-webkit-scrollbar-thumb{background:linear-gradient(90deg,rgba(0,242,254,.4),rgba(79,172,254,.7),rgba(138,43,226,.5))}
+.chip-rail::-webkit-scrollbar-button{display:none}
+.chip{transition:color .25s,border-color .25s,background-color .25s,transform .25s}
+.chip[aria-current=true]{background:rgba(6,182,212,.1);transform:translateY(-1px)}
+
+@media(prefers-reduced-motion:reduce){
+  .js .reveal,.js .reveal.left,.js .reveal.right,.js .reveal.zoom,.js .reveal.from-top{opacity:1;transform:none}
+  #depth-bg{display:none}.chip-rail{scroll-behavior:auto}
+}
+
+header.fixed{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background-color:#0a0f1d!important}
+
+/* replay from the start after scrolling away */
+.js .reveal.rst,.rst .ring{transition:none!important}
+
+/* hero: promote to its own layer, keep the logo glow static */
+[data-parallax]{will-change:transform}
+.logo-blend{animation:none!important}
+
+html,body{overflow-x:clip}
